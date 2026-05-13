@@ -1,5 +1,5 @@
 ---
-name: ⬇️  01- Down load URL
+name: 01- 🔥 دانلود فایل ( اصلی )
 
 on:
   workflow_dispatch:
@@ -677,7 +677,7 @@ jobs:
 
                 DOWNLOAD_LINKS_MD=""
                 LINK_NUM=0
-                for part_file in $(ls "$BACKUP_DIR/${FOLDER_NAME}/"*.zip "$BACKUP_DIR/${FOLDER_NAME}/"*.z[0-9]* 2>/dev/null | sort); do
+                for part_file in $(ls "$BACKUP_DIR/${FOLDER_NAME}/"*.zip "$BACKUP_DIR/${FOLDER_NAME}/"*.z[0-9]* 2>/dev/null | sort -V); do
                   if [ -f "$part_file" ]; then
                     PART_BASENAME=$(basename "$part_file")
                     PART_ENCODED=$(urlencode "${PART_BASENAME}")
@@ -1064,7 +1064,7 @@ jobs:
 
           while IFS= read -r -d '' FILE; do
             ALL_FILES+=("$FILE")
-          done < <(find downloads -type f \( -name "*.zip" -o -name "*.z[0-9][0-9]" -o -name "*.z[0-9]" -o -name "*.mp4" -o -name "*.mp3" -o -name "*.m4a" -o -name "*.exe" -o -name "*.iso" -o -name "*.tar*" -o -name "*.rar" \) -print0 2>/dev/null | sort -z)
+          done < <(find downloads -type f \( -name "*.zip" -o -name "*.z[0-9][0-9][0-9]" -o -name "*.z[0-9][0-9]" -o -name "*.z[0-9]" -o -name "*.mp4" -o -name "*.mp3" -o -name "*.m4a" -o -name "*.exe" -o -name "*.iso" -o -name "*.tar*" -o -name "*.rar" \) -print0 2>/dev/null | sort -zV)
 
           TOTAL_FILES=${#ALL_FILES[@]}
           echo "Found $TOTAL_FILES files to push"
